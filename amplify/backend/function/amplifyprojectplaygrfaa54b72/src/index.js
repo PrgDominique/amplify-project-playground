@@ -1,17 +1,9 @@
-
-
-/**
- * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
- */
-exports.handler = async (event) => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
-    return {
-        statusCode: 200,
-    //  Uncomment below to enable CORS requests
-    //  headers: {
-    //      "Access-Control-Allow-Origin": "*",
-    //      "Access-Control-Allow-Headers": "*"
-    //  }, 
-        body: JSON.stringify('Hello from Lambda!'),
-    };
+exports.handler = async event => {
+  const Products = async () => {
+    const response = await fetch('https://fakestoreapi.com/products/1');
+    const json = await response.json();
+    return json;
+  }
+ return Products
 };
+
