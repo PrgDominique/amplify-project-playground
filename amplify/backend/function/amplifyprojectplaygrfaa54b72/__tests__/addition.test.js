@@ -2,8 +2,6 @@ const { describe, expect, it } = require('@jest/globals');
 const { handler } = require('../src');
 
 describe('Fetch API', () => {
-
-
   it('Output the product coming from fakestoreapi', async () => {
     // TODO: fetch the data
     const response = await fetch('https://fakestoreapi.com/products/1');
