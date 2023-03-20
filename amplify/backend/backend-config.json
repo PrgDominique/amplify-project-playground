@@ -1,1 +1,9 @@
-{}
+{
+  "function": {
+    "amplifyprojectplaygrfaa54b72": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  }
+}

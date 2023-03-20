@@ -10,6 +10,11 @@
       "StackName": "amplify-amplifyprojectplaygr-dev-103523",
       "StackId": "arn:aws:cloudformation:ap-southeast-2:990838898128:stack/amplify-amplifyprojectplaygr-dev-103523/dfb53620-c6c7-11ed-9208-069b12b3e714",
       "AmplifyAppId": "d1eqe7hhfypzaw"
+    },
+    "categories": {
+      "function": {
+        "amplifyprojectplaygrfaa54b72": {}
+      }
     }
   }
 }
