@@ -13,7 +13,10 @@
     },
     "categories": {
       "function": {
-        "amplifyprojectplaygrfaa54b72": {}
+        "amplifyprojectplaygrfaa54b72": {
+          "deploymentBucketName": "amplify-amplifyprojectplaygr-dev-103523-deployment",
+          "s3Key": "amplify-builds/amplifyprojectplaygrfaa54b72-77634375487448345634-build.zip"
+        }
       }
     }
   }
