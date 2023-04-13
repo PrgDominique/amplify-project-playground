@@ -1,4 +1,8 @@
 #amplify-do-not-edit-begin
+
+# testing
+/coverage
+
 amplify/\#current-cloud-backend
 amplify/.config/local-*
 amplify/logs
@@ -16,7 +20,7 @@ amplifyconfiguration.dart
 amplify-build-config.json
 amplify-gradle-config.json
 amplifytools.xcconfig
-clover.xml
+
 .secret-*
 **.sample
 #amplify-do-not-edit-end
