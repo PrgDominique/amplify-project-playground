@@ -1,11 +1,12 @@
 const { describe, it } = require('@jest/globals');
 const { handler } = require('../src');
+const data = require('./mock.data.json')
 
 let result;
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
-    json: () => Promise.resolve({ test: { name: 'hello' } }),
+    json: () => Promise.resolve(data),
   }),
 );
 
