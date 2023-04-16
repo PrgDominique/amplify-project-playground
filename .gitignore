@@ -1,9 +1,6 @@
 #amplify-do-not-edit-begin
 
-/coverage.data
-/coverage/
 coverage/
-lcov-report/
 
 
 amplify/\#current-cloud-backend
