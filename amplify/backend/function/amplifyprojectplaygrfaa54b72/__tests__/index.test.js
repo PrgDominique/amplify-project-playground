@@ -1,7 +1,13 @@
 const { describe, it } = require('@jest/globals');
 const { handler } = require('../src');
 
-let result
+let result;
+
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({ test: { name: 'hello' } }),
+  }),
+);
 
 describe('this would return a value', () => {
   it('return the args', () => {
@@ -18,7 +24,7 @@ describe('this would return a value', () => {
   });
 
   it('return an id', async () => {
-     result = await handler(3);
+    result = await handler();
     console.log('result: ' + JSON.stringify({ result }, null, 2));
   });
 });

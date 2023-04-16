@@ -1,7 +1,10 @@
 #amplify-do-not-edit-begin
 
-# testing
-/coverage
+/coverage.data
+/coverage/
+coverage/
+lcov-report/
+
 
 amplify/\#current-cloud-backend
 amplify/.config/local-*
