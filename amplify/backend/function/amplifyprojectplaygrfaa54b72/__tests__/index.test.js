@@ -1,6 +1,6 @@
 const { describe, it } = require('@jest/globals');
 const { handler } = require('../src');
-const data = require('./mock.data.json');
+const mockData = require('./mock.data.json');
 const fetch = require('node-fetch');
 
 let result;
@@ -10,6 +10,8 @@ let result;
 //     json: () => Promise.resolve(data),
 //   }),
 // );
+jest.mock('node-fetch');
+
 
 describe('this would return a value', () => {
   // it('return the args', () => {
@@ -36,16 +38,23 @@ describe('this would return a value', () => {
   //     .catch(error => console.error(error));
   // });
 
-  jest.mock('node-fetch');
   test('should mock node-fetch', async () => {
     fetch.mockResolvedValueOnce({
       ok: true,
-      json: async () => ({ data: 'test' }),
+      json:  () => (mockData),
     });
 
+    // fetch.mockImplementation(() =>
+    // Promise.resolve({
+    //   json: () => Promise.resolve(mockData)
+    // })
+  // );
     const response = await fetch('https://example.com/api/data');
     const data = await response.json();
 
-    expect(data).toEqual({ data: 'test' });
+    // throw new Error(JSON.stringify({data},null,2))
+    console.log(data);
+
+    expect(data).toEqual(mockData);
   });
 });
