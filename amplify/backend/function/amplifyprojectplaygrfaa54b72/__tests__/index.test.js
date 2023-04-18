@@ -4,14 +4,18 @@ const mockData = require('./mock.data.json');
 const fetch = require('node-fetch');
 
 let result;
+jest.mock('node-fetch');
+// jest.mock('../src/index.js', () => {
+//   return jest.fn().mockImplementation(() => {
+//     return { playSoundFile: 'fakePlaySoundFile' };
+//   });
+// });
 
 // global.fetch = jest.fn(() =>
 //   Promise.resolve({
 //     json: () => Promise.resolve(data),
 //   }),
 // );
-jest.mock('node-fetch');
-
 
 describe('this would return a value', () => {
   // it('return the args', () => {
@@ -38,23 +42,26 @@ describe('this would return a value', () => {
   //     .catch(error => console.error(error));
   // });
 
-  test('should mock node-fetch', async () => {
+  it('should mock node-fetch', async () => {
     fetch.mockResolvedValueOnce({
       ok: true,
-      json:  () => (mockData),
+      json: () => Promise.resolve(mockData),
     });
 
     // fetch.mockImplementation(() =>
     // Promise.resolve({
     //   json: () => Promise.resolve(mockData)
     // })
-  // );
-    const response = await fetch('https://example.com/api/data');
-    const data = await response.json();
-
+    // );
+    // const response = await fetch('https://example.com/api/data');
+    // const data = await response.json();
+    result = await handler(1);
+    // throw new Error('stop')
+    // console.log('result: ' + JSON.stringify({ result }, null, 2));
     // throw new Error(JSON.stringify({data},null,2))
-    console.log(data);
-
-    expect(data).toEqual(mockData);
+    // console.log(data);
+    console.log('fetch: ' + fetch);
+    // expect(fetch).toHaveBeenCalledWith('https://fakestoreapi.com/products/1');
+    expect(result).toBe(mockData);
   });
 });
