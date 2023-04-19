@@ -2,6 +2,7 @@ const { describe, it } = require('@jest/globals');
 const { handler } = require('../src');
 const mockData = require('./mock.data.json');
 const fetch = require('node-fetch');
+const { sampleTest } = require('./test.data');
 
 let result;
 jest.mock('node-fetch');
@@ -18,6 +19,29 @@ jest.mock('node-fetch');
 // );
 
 describe('this would return a value', () => {
+  it('return once ', () => {
+    const mockCallback = jest.fn();
+
+    sampleTest(mockCallback);
+    console.log(mockCallback.mock.calls[0][0]);
+    expect(mockCallback.mock.calls.length).toBe(1);
+    expect(mockCallback.mock.calls[0][0]).toBe(1);
+
+    // Mock the callback function again with a different value
+    mockCallback.mockImplementationOnce(count => {
+      expect(count).toBe(2);
+    });
+
+    // Call the incrementCounter function with the new mock callback
+    sampleTest(mockCallback);
+    sampleTest((count) => {
+      console.log(`The counter is now ${count}`);
+    })
+
+    // Assert that the callback was called with the expected values again
+    expect(mockCallback.mock.calls.length).toBe(2);
+    expect(mockCallback.mock.calls[1][0]).toBe(2);
+  });
   // it('return the args', () => {
   //   const myMock1 = jest.fn();
   //   const args1 = 'first arg';
@@ -42,26 +66,26 @@ describe('this would return a value', () => {
   //     .catch(error => console.error(error));
   // });
 
-  it('should mock node-fetch', async () => {
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: () => Promise.resolve(mockData),
-    });
+  // it('should mock node-fetch', async () => {
+  //   fetch.mockResolvedValueOnce({
+  //     ok: true,
+  //     json: () => Promise.resolve(mockData),
+  //   });
 
-    // fetch.mockImplementation(() =>
-    // Promise.resolve({
-    //   json: () => Promise.resolve(mockData)
-    // })
-    // );
-    // const response = await fetch('https://example.com/api/data');
-    // const data = await response.json();
-    result = await handler(1);
-    // throw new Error('stop')
-    // console.log('result: ' + JSON.stringify({ result }, null, 2));
-    // throw new Error(JSON.stringify({data},null,2))
-    // console.log(data);
-    console.log('fetch: ' + fetch);
-    // expect(fetch).toHaveBeenCalledWith('https://fakestoreapi.com/products/1');
-    expect(result).toBe(mockData);
-  });
+  //   // fetch.mockImplementation(() =>
+  //   // Promise.resolve({
+  //   //   json: () => Promise.resolve(mockData)
+  //   // })
+  //   // );
+  //   // const response = await fetch('https://example.com/api/data');
+  //   // const data = await response.json();
+  //   result = await handler(1);
+  //   // throw new Error('stop')
+  //   // console.log('result: ' + JSON.stringify({ result }, null, 2));
+  //   // throw new Error(JSON.stringify({data},null,2))
+  //   // console.log(data);
+  //   console.log('fetch: ' + fetch);
+  //   // expect(fetch).toHaveBeenCalledWith('https://fakestoreapi.com/products/1');
+  //   expect(result).toBe(mockData);
+  // });
 });
