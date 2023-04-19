@@ -29,17 +29,24 @@ describe('this would return a value', () => {
 
     // Mock the callback function again with a different value
     mockCallback.mockImplementationOnce(count => {
+      console.log(` The counter is now ${count}`);
       expect(count).toBe(2);
+    });
+
+    sampleTest(mockCallback);
+    mockCallback.mockImplementationOnce(count => {
+      console.log(` The counter is now ${count}`);
     });
 
     // Call the incrementCounter function with the new mock callback
     sampleTest(mockCallback);
-    sampleTest((count) => {
+    sampleTest(count => {
       console.log(`The counter is now ${count}`);
-    })
+    });
 
+    console.log(mockCallback.mock.calls);
     // Assert that the callback was called with the expected values again
-    expect(mockCallback.mock.calls.length).toBe(2);
+    expect(mockCallback.mock.calls.length).toBe(3);
     expect(mockCallback.mock.calls[1][0]).toBe(2);
   });
   // it('return the args', () => {
