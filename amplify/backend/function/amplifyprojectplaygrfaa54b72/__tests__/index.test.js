@@ -2,16 +2,15 @@ const { describe, it } = require('@jest/globals');
 const { handler } = require('../src');
 const mockData = require('./mock.data');
 const fetch = require('node-fetch');
-const { sampleTest } = require('./test.data');
 
 let result;
-jest.mock('node-fetch');
+// jest.mock('node-fetch');
 
-// global.fetch = jest.fn(() =>
-//   Promise.resolve({
-//     json: () => Promise.resolve(mockData),
-//   }),
-// );
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve(mockData),
+  }),
+);
 
 describe('this would return a value', () => {
   // it('return once ', () => {
@@ -56,16 +55,17 @@ describe('this would return a value', () => {
   // });
 
   // it('return an id', async () => {
+  //   result = await handler(1)
   //  const getData = await fetch('https://jsonplaceholder.typicode.com/todos/1')
 
   // });
 
   it('should mock node-fetch', async () => {
     // throw new Error(JSON.stringify({ mockData }, null, 2));
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: () => Promise.resolve(mockData),
-    });
+    // fetch.mockResolvedValueOnce({
+    //   ok: true,
+    //   json: () => Promise.resolve(mockData),
+    // });
 
     // fetch.mockImplementation(() =>
     // Promise.resolve({
@@ -73,11 +73,13 @@ describe('this would return a value', () => {
     // })
     // );
     result = await handler(1);
-    const response = await fetch('https://example.com/api/data');
-    const data = await response.json();
-    const newData = data.mockData
+    // const response = await fetch('https://example.com/api/data');
+    // const data = await response.json();
+    // const newData = data.mockData
+    // console.log(JSON.stringify({ data }, null, 2));
+    console.log(JSON.stringify({ result }, null, 2));
     // throw new Error(JSON.stringify({ newData }, null, 2));
-
+    const newData = mockData.mockData
     expect(result).toEqual(newData);
   });
 });

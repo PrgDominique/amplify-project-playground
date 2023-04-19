@@ -11,7 +11,6 @@ global.fetch = jest.fn(() =>
 describe('this would return a response', () => {
   it('it should match the response by handler and the hardcoded mock data', async () => {
     const result = await handler(1)
-    // throw new Error(JSON.stringify({result},null,2))
     const newData = mockData.mockData
     expect(result).toEqual(newData)
   });

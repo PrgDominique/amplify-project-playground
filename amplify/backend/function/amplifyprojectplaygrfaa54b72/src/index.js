@@ -5,6 +5,6 @@ exports.handler = async event => {
   // console.log('fetch1: '+ JSON.stringify({ fetch }, null, 2));
   const product = await response.json();
   // throw new Error(JSON.stringify({ product }, null, 2));
-  console.log(product);
+  // console.log(product);
   return product;
 };
